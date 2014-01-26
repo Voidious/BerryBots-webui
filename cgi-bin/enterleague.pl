@@ -3,6 +3,7 @@ use CGI;
 
 $basedir = "/home/ubuntu/leaguebots";
 $maxCodeLength = 512 * 1024;
+$maxNameLength = $maxEmailLength = 1024;
 
 $query = new CGI;
 $authorName = $query->param("name");
@@ -26,7 +27,15 @@ print "Content-type: text/html\n\n";
 
 if (length($code) > $maxCodeLength) {
   $success = "false";
-  $message = "Dude, that's way too much code! (" . length($code) . " chars)\n";
+  $message = "Whoah, that's way too much code! (" . length($code) . " chars)\n";
+} elsif (length($authorName) > $maxNameLength) {
+  $success = "false";
+  $message = "Whoah, your name is way too long! (" . length($authorName)
+      . " chars)\n";
+} elsif (length($authorEmail) > $maxEmailLength) {
+  $success = "false";
+  $message = "Whoah, your email is way too long! (" . length($authorEmail)
+      . " chars)\n";
 }
 
 if ($success eq "true") {
