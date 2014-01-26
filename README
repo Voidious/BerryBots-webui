@@ -1,0 +1,18 @@
+This is a simple web app that lets you play BerryBots through a browser. It
+provides a UI to write Lua code and configure a BerryBots match. On submit, a
+Perl script saves your code, runs the BerryBots match (headless) on a server,
+saves the replay, and loads the replay in your browser.
+
+You can try it on the web at: http://playberrybots.com
+
+To set this up yourself, you'd need to:
+  * Copy the webui files (this project) to your web server, eg /var/www/bbui.
+  * Compile BerryBots 'webui' Makefile target from source on your server.
+      unzip ~/Downloads/berrybots_src_1.3.2.zip
+      cd berrybots
+      ./configure
+      make webui
+  * Update cgi-bin/runmatch.pl to point at your BerryBots instance.
+  * Modify permissions to ensure your web server can execute BerryBots, that the
+    web 'replays' directory is writeable, and that the files in cgi-bin are
+    executable.
