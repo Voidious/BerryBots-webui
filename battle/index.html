@@ -1,7 +1,7 @@
 <html>
-<link rel="stylesheet" type="text/css" href="playberrybots.css">
+<link rel="stylesheet" type="text/css" href="../playberrybots.css">
 <head>
-  <title>Play BerryBots</title>
+  <title>Play BerryBots: Battles</title>
   <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-45782896-1']);
@@ -13,11 +13,11 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   </script>
-  <script src="playberrybots.js"></script>
+  <script src="/playberrybots.js"></script>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Ubuntu:regular' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono:regular' rel='stylesheet' type='text/css'>
-<link rel="shortcut icon" href="favicon.gif">
+<link rel="shortcut icon" href="/favicon.gif">
 <body>
 
 <a name="editor"></a>
@@ -31,10 +31,10 @@
           <div class="formLabel">Stage:</div>
           <div class="di">
             <select id="Stage" size="4" onchange="onStageSelect()" class="fileList">
-              <option SELECTED value="vortex.lua">Vortex</option>
-              <option value="battle1.lua">Battle</option>
-              <option value="maze2.lua">Maze</option>
-              <option value="joust.lua">Joust</option>
+              <option SELECTED value="battle1.lua">Battle1</option>
+              <option value="battle2.lua">Battle2</option>
+              <option value="battle3.lua">Battle3</option>
+              <option value="randombattle.lua">RandomBattle</option>
             </select>
           </div>
         </div>
@@ -42,12 +42,11 @@
           <div class="formLabel">Opponent:</div>
           <div class="di">
             <select id="Opponent" size="6" class="fileList">
-              <option value="floatingduck.lua">FloatingDuck</option>
+              <option SELECTED value="randombot.lua">RandomBot</option>
               <option value="chaser.lua">Chaser</option>
-              <option value="randombot.lua">RandomBot</option>
+              <option value="wallhugger.lua">WallHugger</option>
               <option value="basicbattler.lua">BasicBattler</option>
-              <option value="jouster.lua">Jouster</option>
-              <option SELECTED>&lt;none&gt;</option>
+              <option value="floatingduck.lua">FloatingDuck</option>
             </select>
           </div>
         </div>
@@ -67,10 +66,9 @@
         Or start with code from:
         <ul class="botLinkList">
           <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('player.lua')">Default code</a></li>
-          <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('vortexer.lua')">Vortexer</a></li>
-          <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('chaser.lua')">Chaser</a></li>
           <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('randombot.lua')">RandomBot</a></li>
-          <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('jouster.lua')">Jouster</a></li>
+          <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('chaser.lua')">Chaser</a></li>
+          <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('wallhugger.lua')">WallHugger</a></li>
           <li><a href="javascript:void(0)" class="uiLink" onclick="loadBot('basicbattler.lua')">BasicBattler</a></li>
         </ul>
       </div>
@@ -102,7 +100,7 @@
   <a name="player"></a>
 </div>
 
-<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
   if (isMobile.any()) {
     var editorArea = document.createElement('textarea');
