@@ -667,12 +667,10 @@ function showEnterLeagueForm() {
           }, 1500);
           messageSpan.className = 'entryMessage entryError';
           messageSpan.innerHTML = message;
-          leagueDiv.style.height = '230px';
         } else {
           _gaq.push(['_trackEvent', 'enter league', 'submitted']);
           messageSpan.className = 'entryMessage entrySuccess';
           messageSpan.innerHTML = 'Success!';
-          leagueDiv.style.height = '218px';
           setTimeout(function() {
             hideEnterLeagueForm();
           }, 1000);
