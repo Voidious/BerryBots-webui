@@ -228,7 +228,7 @@ input {
   left: 0;
   bottom: 0;
   right: 0;
-  width: 660px;
+  width: 670px;
   height: 480px;
   background-color: #fff;
   z-index: 100;
@@ -246,7 +246,7 @@ input {
 }
 
 .crashMenuContent {
-  margin-top: 90px;
+  margin-top: 4em;
 }
 
 .crashMenuItem {
@@ -267,7 +267,7 @@ input {
   position: absolute;
   display: inline-block;
   width: 530px;
-  padding: 20px 0 20px 10px;
+  padding: 12px 0 20px 20px;
   font-size: 1.1em;
   margin-top: 5px;
 }
@@ -279,6 +279,10 @@ input {
 
 .crashContent li {
   margin-bottom: 5px;
+}
+
+.crashIntroText {
+  margin-top: 4em;
 }
 
 .crashImg {

@@ -481,7 +481,7 @@ function highlightCrashMenuItem(id) {
 }
 
 function getCrashIntroHtml() {
-  return '<p>In BerryBots, you program a ship in '
+  return '<p class="crashIntroText">In BerryBots, you program a ship in '
       + '<a href="http://lua.org" target="_blank">Lua</a> to move around and '
       + 'complete challenges or compete against other ships.</p>'
       + '<p>This is a crash course to help get you started.</p>'
