@@ -1,0 +1,15 @@
+{
+  "name": "BerryBots-webui",
+  "description": "A web interface for BerryBots, a Lua programming game.",
+  "version": "2.0.0",
+  "homepage": "http://playberrybots.com",
+  "license": "zlib",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "html5-boilerplate": "~5.2.0"
+  }
+}

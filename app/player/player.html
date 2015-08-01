@@ -1,0 +1,30 @@
+<div class="player" tabindex="-1" bb-focus="true"
+     ng-keydown="playerKeyDown($event.keyCode)">
+  <bb-button class="player-back-button" ng-click="back()">
+      Back
+  </bb-button>
+
+  <div class="error-log-bar" ng-show="(errorLog != null && errorLog.length > 0)">
+    Your bot hit some errors.
+    <a href="javascript:void(0)" ng-click="showErrorLog()"
+        ><span ng-show="!showingErrorLog">[ View error log ]</span>
+        <span ng-show="showingErrorLog">[ Hide error log ]</span>
+    </a>
+   </div>
+
+  <div class="error-log-mouseover-shield" ng-show="showingErrorLog"></div>
+  <div class="error-log" ng-show="showingErrorLog">
+    <div class="error-log-text">
+      <p>{{errorLog}}</p>
+    </div>
+  </div>
+
+  <div class="player-replay">
+    <iframe ng-src="{{replayUrl}}"></iframe>
+  </div>
+
+  <!-- This is a hack to get around the way Ace is integrated right now.
+       I think the div should go in index.html and the rest should be
+       structured as a service. -->
+  <div id="editor" style="visibility: hidden; z-index: -100"></div>
+</div>

@@ -1,0 +1,232 @@
+<div tabindex="-1" bb-focus="true" tabindex="-1" class="codeview">
+  <a name="editor"></a>
+  <div class="mobile-editor-area" ng-show="isMobile">
+    <textarea ng-model="editorText"></textarea>
+  </div>
+  <div id="editor" ng-show="!isMobile"></div>
+
+  <div class="sidebar">
+    <div class="sidebar-config">
+      <div class="sidebar-label">Stage:</div>
+      <div class="sidebar-value">{{stages[stage].name}}</div>
+    </div>
+    <div class="sidebar-config" ng-show="opponent != '<none>'">
+      <div class="sidebar-label">Opponent:</div>
+      <div class="sidebar-value">{{bots[opponent].name}}</div>
+    </div>
+    <div class="sidebar-config" ng-show="!configuring">
+      <div class="di">&nbsp;</div>
+      <div class="configure-link">
+        <a href="javascript:void(0)"
+           ng-click="configure()">[ Configure ]</a>
+      </div>
+    </div>
+    <div class="sidebar-config" ng-show="!configuring">
+      <bb-button class="sidebar-run-match-button" ng-click="runMatch()">
+        Run match
+      </bb-button>
+      <bb-spinner class="sidebar-run-match-spinner" ng-show="runningMatch">
+      </bb-spinner>
+    </div>
+    <bb-button class="sidebar-starter-kit-button" ng-click="showStarterKit()">
+      Starter kit
+    </bb-button>
+    <bb-button class="sidebar-sample-bots-button" ng-click="showSampleBots()">
+      Samples
+    </bb-button>
+    <bb-button class="sidebar-api-docs-button" ng-click="showApiDocs($event)">
+      API docs
+    </bb-button>
+    <div class="sidebar-powered-by">
+      Powered by:<br>
+        &nbsp;&nbsp;&nbsp; <a href="http://angularjs.org" target="_blank">AngularJS</a>
+        &nbsp;&bull;&nbsp; <a href="http://kineticjs.com" target="_blank">KineticJS</a>
+        &nbsp;&bull;&nbsp; <a href="http://luajit.org" target="_blank">LuaJIT</a><br>
+        &nbsp;&nbsp;&nbsp; <a href="http://ace.c9.io" target="_blank">Ace</a>
+        &nbsp;&bull;&nbsp; <a href="http://ethanschoonover.com/solarized" target="_blank">Solarized</a>
+        &nbsp;&bull;&nbsp; <a href="http://aws.amazon.com/ec2/" target="_blank">Amazon EC2</a>
+    </div>
+    <div class="sidebar-berrybots-com">
+      Want more?<br>
+        &nbsp;&nbsp;&nbsp; <a href="http://berrybots.com" target="_blank">berrybots.com</a>
+        &nbsp;&bull;&nbsp; <a href="http://berrybots.com/forum" target="_blank">Forums</a>
+        &nbsp;&bull;&nbsp; <a href="http://berrybots.com/wiki" target="_blank">Wiki</a>
+    </div>
+  </div>
+
+  <div class="configure-glass" ng-show="configuring">
+    <div class="configure" tabindex="-1"
+         ng-keydown="configuringKeyDown($event.keyCode)">
+      <div class="configure-match" ng-show="isMobile">
+        <div>
+          <div class="mobile-form-label">Stage:</div>
+          <div class="mobile-form-values configure-values">
+            <select ng-model="configureStage"
+                ng-options="stage as stages[stage].name for stage in stageList">
+            </select>
+          </div>
+        </div>
+        <div class="mobile-configure-opponent" ng-show="opponents().length != 0">
+          <div class="mobile-form-label">Opponent:</div>
+          <div class="mobile-form-values configure-values">
+            <select ng-model="configureOpponent"
+                ng-options="bot as bots[bot].name for bot in opponents()">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="configure-match" ng-show="!isMobile">
+        <div class="configure-stage">
+          <div class="form-label">Stage:</div>
+          <div class="form-values configure-values">
+            <select class="focus-shadow" ng-model="configureStage"
+                ng-options="stage as stages[stage].name for stage in stageList"
+                bb-focus="configuring" ng-attr-size="{{stageList.length}}">
+            </select>
+          </div>
+        </div>
+        <div class="configure-opponent" ng-show="opponents().length != 0">
+          <div class="form-label">Opponent:</div>
+          <div class="form-values configure-values">
+            <select class="focus-shadow" ng-model="configureOpponent"
+                ng-options="bot as bots[bot].name for bot in opponents()"
+                ng-attr-size="{{opponents().length}}">
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-preview">
+        <div class="stage-preview-image" ng-mouseover="highlightStage()"
+             ng-mouseout="unhighlightStage()">
+          <img ng-src="images/{{configureStage}}.png">
+        </div>
+        <div class="stage-description" ng-show="!stageHighlighted">
+          {{stages[configureStage].description}}
+        </div>
+        <div class="stage-description almost-transparent"
+             ng-show="stageHighlighted">
+          {{stages[configureStage].description}}
+        </div>
+        <bb-button class="configure-cancel-button" ng-click="configure(false)">
+          Cancel
+        </bb-button>
+        <div class="configure-esc">
+          &lt;esc&gt;
+        </div>
+        <div class="configure-press-enter">
+          Press &lt;enter&gt; to&nbsp;
+        </div>
+        <bb-button class="configure-save-button" ng-click="saveMatchConfig()">
+          Save
+        </bb-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="starter-kit-glass" ng-show="showingStarterKit">
+    <div class="starter-kit" tabindex="-1"
+         ng-keydown="starterKitKeyDown($event.keyCode)">
+      <p>
+        Choose your movement and guns! They'll be wired up for you in the editor.
+      </p>
+      <div class="starter-kit-form">
+        <div class="starter-kit-moves">
+          <div class="starter-kit-form-label">Movement:</div>
+          <div class="mobile-form-values" ng-show="isMobile">
+            <select ng-model="movesSnippet"
+                ng-options="snippet as starterMoves[snippet].name for snippet in starterMovesList" 
+                ng-attr-size="{{starterMovesList.length}}">
+            </select>
+          </div>
+          <div class="form-values snippet-values" ng-show="!isMobile">
+            <select class="focus-shadow" ng-model="movesSnippet"
+                ng-options="snippet as starterMoves[snippet].name for snippet in starterMovesList" 
+                ng-attr-size="{{starterMovesList.length}}"
+                bb-focus="showingStarterKit">
+            </select>
+          </div>
+          <div class="starter-kit-description">
+            {{starterMoves[movesSnippet].description}}
+            <div class="starter-kit-supported-modes" ng-show="starterMoves[movesSnippet].modes.length > 0">
+              Supports:&nbsp;&nbsp;{{starterMoves[movesSnippet].modes | bbList}}
+            </div>
+          </div>
+        </div>
+
+        <div class="starter-kit-guns">
+          <div class="starter-kit-form-label">Guns:</div>
+          <div class="mobile-form-values" ng-show="isMobile">
+            <select ng-model="gunsSnippet"
+                ng-options="snippet as starterGuns[snippet].name for snippet in starterGunsList" 
+                ng-attr-size="{{starterGunsList.length}}">
+            </select>
+          </div>
+          <div class="form-values snippet-values" ng-show="!isMobile">
+            <select class="focus-shadow" ng-model="gunsSnippet"
+                ng-options="snippet as starterGuns[snippet].name for snippet in starterGunsList" 
+                ng-attr-size="{{starterGunsList.length}}">
+            </select>
+          </div>
+          <div class="starter-kit-description">
+            {{starterGuns[gunsSnippet].description}}
+          </div>
+        </div>
+
+        <bb-button class="starter-kit-cancel-button" ng-click="showStarterKit(false)">
+          Cancel
+        </bb-button>
+        <div class="starter-kit-esc">
+          &lt;esc&gt;
+        </div>
+        <bb-button class="starter-kit-save-button" ng-click="saveStarterKit()">
+          Start with this code
+        </bb-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample-bots-glass" ng-show="showingSampleBots">
+    <div class="sample-bots" tabindex="-1"
+         ng-keydown="sampleBotsKeyDown($event.keyCode)">
+      <p>
+        Choose one of the sample bots as the base for your own bot.
+      </p>
+      <div class="sample-bots-form">
+        <div class="sample-bots-select">
+          <div class="sample-bots-form-label">Ship:</div>
+          <div class="mobile-form-values" ng-show="isMobile">
+            <select ng-model="sampleBot"
+                ng-options="botName as sampleBots[botName].name for botName in sampleBotsList" 
+                ng-attr-size="{{sampleBotsList.length}}">
+            </select>
+          </div>
+          <div class="form-values sample-bots-values" ng-show="!isMobile">
+            <select class="focus-shadow" ng-model="sampleBot"
+                ng-options="botName as sampleBots[botName].name for botName in sampleBotsList" 
+                ng-attr-size="{{sampleBotsList.length}}"
+                bb-focus="showingSampleBots">
+            </select>
+          </div>
+          <div class="sample-bots-description">
+            {{sampleBots[sampleBot].description}}
+            <div class="sample-bots-supported-modes" ng-show="sampleBots[sampleBot].modes.length > 0">
+              Supports:&nbsp;&nbsp;{{sampleBots[sampleBot].modes | bbList}}
+            </div>
+          </div>
+        </div>
+
+        <bb-button class="sample-bots-cancel-button" ng-click="showSampleBots(false)">
+          Cancel
+        </bb-button>
+        <div class="sample-bots-esc">
+          &lt;esc&gt;
+        </div>
+        <bb-button class="sample-bots-save-button" ng-click="loadSelectedSampleBot()">
+          Start with this code
+        </bb-button>
+      </div>
+    </div>
+  </div>
+</div>

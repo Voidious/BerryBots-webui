@@ -1,18 +1,38 @@
-This is a simple web app that lets you play BerryBots through a browser. It
-provides a UI to write Lua code and configure a BerryBots match. On submit, a
-Perl script saves your code, runs the BerryBots match (headless) on a server,
-saves the replay, and loads the replay in your browser.
+This is an Angular web app to let you play BerryBots in a browser. You can try
+it on the web at: http://playberrybots.com
 
-You can try it on the web at: http://playberrybots.com
+The UI includes:
+  * A code editor with nice colors and Lua syntax highlighting.
+  * A configuration pane for selecting from a few of the sample stages (with
+    pictures!), plus an opponent appropriate for the stage (if any).
+  * A "starter kit", so you can begin by selecting from a few movement and
+    targeting snippets. In a few clicks, you can have a pretty decent bot.
+  * A "sample bots" gallery, so you can begin by browsing some of the sample
+    bots and starting from their code.
 
-To set this up yourself, you'd need to:
-  * Copy the webui files (this project) to your web server, eg /var/www/bbui.
-  * Compile BerryBots 'webui' Makefile target from source on your server.
-      unzip ~/Downloads/berrybots_src_1.3.2.zip
-      cd berrybots
-      ./configure --with-nodeps
-      make webui
-  * Update cgi-bin/runmatch.pl to point at your BerryBots instance.
+On submit, a Perl script saves your code, runs the BerryBots match (headless)
+on a server, saves the replay, and loads the replay URL in an iframe.
+
+To set this up yourself:
+  * It's branched from angular-seed: https://github.com/angular/angular-seed
+    So you might want to check its README too. First off, you'll need node.js
+    and its package manager (npm) from http://nodejs.org/.
+  * Once you have that, run:
+      ~> npm install
+    to get the dependencies ("node_modules" and "app/bower_components").
+  * Then you can do:
+    * "npm start" to run the server locally: ttp://localhost:8000
+    * ...or "npm test" to run the unit tests.
+    * ...or "npm run protractor" to run the end-to-end tests.
+  * For a real install, copy app/* files to your web server, eg /var/www/bbui.
+  * Compile the BerryBots 'webui' Makefile target from source on your server.
+      ~> unzip ~/Downloads/berrybots_src_1.3.2.zip
+      ~> cd berrybots
+      ~/berrybots> ./configure --with-nodeps
+      ~/berrybots> make webui
+  * Copy the replay JS files from BerryBots to the web UI replays directory.
+      cp ~/berrybots/replays/*.js /var/www/bbui/replays
+  * Update /var/www/bbui/cgi-bin/runmatch.pl to point to the BerryBots instance.
   * Modify permissions to ensure your web server can execute BerryBots, that the
     web 'replays' directory is writeable, and that the files in cgi-bin are
     executable.
