@@ -130,6 +130,7 @@ button {
   padding-left: 10px;
   font-family: Ubuntu Mono, Consolas, monospace;
   font-size: 14px;
+  color: #000;
   border: 0;
 }
 
@@ -285,6 +286,7 @@ button {
 .mobile-form-values > select {
   font-family: Ubuntu, Arial, sans-serif;
   font-size: 1em;
+  color: #000;
 }
 
 .configure-match {
