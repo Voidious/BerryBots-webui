@@ -259,7 +259,8 @@ playberrybots.CodeView =
   $scope.gunsSnippet = $scope.starterGunsList[0];
 
   $scope.$watch('configureStage', function() {
-    $scope.configureOpponent = defaultOpponent($scope.configureStage);
+    $scope.configureOpponent = ($scope.configureStage == $scope.stage) ?
+        $scope.opponent : defaultOpponent($scope.configureStage);
   });
   $scope.$watch('configuring', function() {
     $scope.saving = false;
@@ -282,6 +283,10 @@ playberrybots.CodeView =
 
   $scope.configure = function(configuring) {
     $scope.configuring = configuring || (configuring === undefined);
+    if ($scope.configuring) {
+      $scope.configureStage = $scope.stage;
+      $scope.configureOpponent = $scope.opponent;
+    }
   };
 
   $scope.showStarterKit = function(showStarterKit) {
