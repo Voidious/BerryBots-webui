@@ -177,7 +177,7 @@ function getBestFiringAngle(wave, dataPoints, projectileSpeed)
   end
 
   for i = 1, FIRING_ANGLES do
-    local firingAngle = math.pi * 2 * i / FIRING_ANGLES
+    local firingAngle = math.pi * 2 * (i - 1) / FIRING_ANGLES
     table.insert(firingAngles, firingAngle)
   end
 
@@ -185,8 +185,7 @@ function getBestFiringAngle(wave, dataPoints, projectileSpeed)
   local bestDensity = -math.huge
   local targetDistance =
       math.sqrt(square(enemyData.x - xShip) + square(enemyData.y - yShip))
-  local bandwidth =
-      2 * math.abs(world:constants().SHIP_RADIUS / targetDistance)
+  local bandwidth = math.abs(world:constants().SHIP_RADIUS / targetDistance)
   for i, firingAngle in ipairs(firingAngles) do
     local density = 0
     for j, dataPoint in ipairs(neighbors) do
