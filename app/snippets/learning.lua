@@ -205,10 +205,9 @@ function getBestFiringAngle(wave, dataPoints, projectileSpeed)
       bestFiringAngle = firingAngle
       bestDensity = density
     end
-    return bestFiringAngle
   end
 
-  return 0
+  return bestFiringAngle
 end
 
 function aimFireLaser()
@@ -260,18 +259,15 @@ function projectFiringAngle(sourceLocation, targetLocation, targetHeading,
   local enemyDistanceSq = math.huge
   local projectileTime = 0
   local projectileDistanceSq = -math.huge
-  local outOfBounds = false
 
   while (projectileDistanceSq < enemyDistanceSq) do
     projectileTime = projectileTime + 1
+    newLocation = { x = targetLocation.x + (projectileTime * dx),
+                    y = targetLocation.y + (projectileTime * dy) }
 
-    -- Project enemy movement as a dead stop if it goes off the stage.
-    -- TODO: simulate wall bounces
-    if (not outOfBounds) then
-      newLocation = { x = targetLocation.x + (projectileTime * dx),
-                      y = targetLocation.y + (projectileTime * dy) }
+    if (isOutOfBounds(newLocation)) then
+      return nil
     end
-    outOfBounds = outOfBounds or isOutOfBounds(newLocation)
 
     enemyDistanceSq = xyDistanceSq(sourceLocation, newLocation)
     projectileDistanceSq = square((projectileTime + 1) * projectileSpeed)
