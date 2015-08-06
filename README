@@ -21,18 +21,19 @@ To set this up yourself:
       ~> npm install
     to get the dependencies ("node_modules" and "app/bower_components").
   * Then you can do:
-    * "npm start" to run the server locally: ttp://localhost:8000
+    * "npm start" to run the server locally: http://localhost:8000
     * ...or "npm test" to run the unit tests.
     * ...or "npm run protractor" to run the end-to-end tests.
-  * For a real install, copy app/* files to your web server, eg /var/www/bbui.
+  * To actually serve it, copy app/* files to your web server, eg /var/www.
   * Compile the BerryBots 'webui' Makefile target from source on your server.
       ~> unzip ~/Downloads/berrybots_src_1.3.2.zip
       ~> cd berrybots
       ~/berrybots> ./configure --with-nodeps
       ~/berrybots> make webui
-  * Copy the replay JS files from BerryBots to the web UI replays directory.
-      cp ~/berrybots/replays/*.js /var/www/bbui/replays
-  * Update /var/www/bbui/cgi-bin/runmatch.pl to point to the BerryBots instance.
+  * Copy the latest replay JS from BerryBots to the web UI replays directory.
+      cp ~/berrybots/replays/*.js /var/www/replays
+  * Update /var/www/cgi-bin/runmatch.pl to point to the BerryBots instance and
+    web replays directories.
   * Modify permissions to ensure your web server can execute BerryBots, that the
-    web 'replays' directory is writeable, and that the files in cgi-bin are
+    web replays directory is writeable, and that the files in cgi-bin are
     executable.

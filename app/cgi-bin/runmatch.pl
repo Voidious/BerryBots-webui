@@ -2,7 +2,14 @@
 use CGI;
 use JSON;
 
-$basedir = "/home/ubuntu/berrybots";
+# For production, use something like:
+#$basedir = "/home/ubuntu/berrybots";
+#$wwwdir = "/var/www"
+
+# @Voidious development:
+$basedir = "/Users/pcupka/Documents/BerryBots/webui-host";
+$wwwdir = "/Users/pcupka/Documents/BerryBots/webui/app";
+
 $maxCodeLength = 512 * 1024;
 $maxErrorLogLines = 120;
 
@@ -53,7 +60,7 @@ $s =~ /\nSaved replay to: replays\/(.*)\n/;
 $replayFilename = $1;
 unlink($basedir . "/bots/" . $filename);
 
-`cp $basedir/replays/$replayFilename /var/www/replays`;
+`cp $basedir/replays/$replayFilename $wwwdir/replays`;
 
 $errorLog = getErrorLog($s);
 

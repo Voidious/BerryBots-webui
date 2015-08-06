@@ -1,12 +1,14 @@
 {
   "name": "BerryBots-webui",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
   "description": "A web interface for BerryBots, a Lua programming game.",
   "repository": "https://github.com/Voidious/BerryBots-webui",
   "license": "zlib",
   "devDependencies": {
     "bower": "^1.3.1",
+    "cgi": "^0.3.1",
+    "express": "^4.13.3",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
     "karma": "~0.12",
@@ -21,7 +23,7 @@
     "postinstall": "bower install",
 
     "prestart": "npm install",
-    "start": "cd app; http-server -a localhost -p 8000 -c-1",
+    "start": "./test-server.js",
 
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
