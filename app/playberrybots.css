@@ -227,7 +227,7 @@ button {
 
 .sidebar-powered-by {
   position: absolute;
-  top: 455px;
+  top: 410px;
   white-space: nowrap;
   font-size: 0.95em;
   line-height: 1.35em;
@@ -235,7 +235,15 @@ button {
 
 .sidebar-berrybots-com {
   position: absolute;
-  top: 540px;
+  top: 495px;
+  white-space: nowrap;
+  font-size: 0.95em;
+  line-height: 1.35em;
+}
+
+.sidebar-fork-me {
+  position: absolute;
+  top: 561px;
   white-space: nowrap;
   font-size: 0.95em;
   line-height: 1.35em;

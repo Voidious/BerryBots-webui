@@ -3,5 +3,6 @@ logs/*
 node_modules/
 bower_components/
 tmp
+app/replays/*.html
 .DS_Store
 .idea
