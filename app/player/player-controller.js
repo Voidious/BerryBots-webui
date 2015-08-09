@@ -26,7 +26,8 @@ playberrybots.Player = [
     '$location',
     '$routeParams',
     '$sce',
-    function($scope, $rootScope, $location, $routeParams, $sce) {
+    '$timeout',
+    function($scope, $rootScope, $location, $routeParams, $sce, $timeout) {
       $scope.errorLog = $rootScope.errorLog;
       $scope.replayUrl = $sce.trustAsResourceUrl('/replays/' + $routeParams.replay);
       $scope.showingErrorLog = false;
@@ -35,11 +36,11 @@ playberrybots.Player = [
         $location.path('/');
       };
 
-      $scope.showErrorLog = function(show) {
+      $scope.showErrorLog = function($event) {
         _gaq.push(['_trackEvent', 'error log', 'open']);
 
-        $scope.showingErrorLog =
-            show || (show === undefined && !$scope.showingErrorLog);
+        $scope.showingErrorLog = !$scope.showingErrorLog;
+        $timeout(function () { $event.target.blur() }, 0, false);
       };
 
       $scope.playerKeyDown = function(keyCode) {

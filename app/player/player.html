@@ -1,16 +1,18 @@
 <div class="player" tabindex="-1" bb-focus="true"
      ng-keydown="playerKeyDown($event.keyCode)">
   <bb-button class="player-back-button" ng-click="back()">
-      Back
+    Back
   </bb-button>
 
-  <div class="error-log-bar" ng-show="(errorLog != null && errorLog.length > 0)">
-    Your bot hit some errors.
-    <a href="javascript:void(0)" ng-click="showErrorLog()"
-        ><span ng-show="!showingErrorLog">[ View error log ]</span>
-        <span ng-show="showingErrorLog">[ Hide error log ]</span>
-    </a>
-   </div>
+  <div class="error-log-hit-errors"
+      ng-show="(errorLog != null && errorLog.length > 0)">
+    <p>Your bot hit some errors.</p>
+    <bb-button class="error-log-show-hide-button"
+        ng-click="showErrorLog($event)">
+      <span ng-show="!showingErrorLog">Show error log</span>
+      <span ng-show="showingErrorLog">Hide error log</span>
+    </bb-button>
+  </div>
 
   <div class="error-log-mouseover-shield" ng-show="showingErrorLog"></div>
   <div class="error-log" ng-show="showingErrorLog">
