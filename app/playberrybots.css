@@ -156,9 +156,17 @@ button {
   -webkit-box-shadow: 0 0 3px 1px #93a1a1;
 }
 
+.form-values > select::-webkit-scrollbar{
+  width: 0;
+}
+
 .snippet-values {
   margin-left: 8px;
   margin-top: 3px;
+}
+
+.snippet-values > select {
+  height: 3.95em;
 }
 
 .sidebar {
